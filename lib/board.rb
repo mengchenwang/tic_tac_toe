@@ -24,4 +24,8 @@ class Board
   def next_turn
     @turn += 1
   end
+
+  def currect_turn_mark
+    @turn.even? ? (return "X") : (return "O") 
+  end
 end

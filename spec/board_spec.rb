@@ -34,4 +34,15 @@ describe Board do
       expect { board.next_turn }.to change { board.turn }.by(1)
     end
   end
+
+  describe '#currect_turn_mark' do
+    it 'returns X at even turn' do
+      expect(board.currect_turn_mark).to eq("X")
+    end
+
+    it 'returns O at odd turn' do
+      board.next_turn
+      expect(board.currect_turn_mark).to eq("O")
+    end
+  end
 end
