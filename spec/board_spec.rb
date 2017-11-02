@@ -22,4 +22,16 @@ describe Board do
     end
   end
 
+  describe '#spot_empty?' do
+    it "return false if spot is already marked" do
+      board.play("X", [0, 0])
+      expect(board.spot_empty?([0, 0])).to eq false
+    end
+  end
+
+  describe '#next_turn' do
+    it 'add 1 to the turn varible' do
+      expect { board.next_turn }.to change { board.turn }.by(1)
+    end
+  end
 end
