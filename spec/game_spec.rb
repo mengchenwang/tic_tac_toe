@@ -17,10 +17,6 @@ describe Game do
     end
   end
 
-  describe '#play' do
-
-  end
-
   describe '#spot_empty?' do
     it 'raise an error if spot is not empty' do
       allow(board).to receive(:spot_empty?).and_return(false)
@@ -36,4 +32,15 @@ describe Game do
     end
   end
 
+  describe '#current_player_win?' do
+    it 'calls board.you_win?' do
+      expect(board).to receive(:you_win?)
+      game.currect_player_win?
+    end
+  end
+
+  describe '#go_to_next_turn' do
+    expect(board).to receive(:next_turn)
+    game.go_to_next_turn
+  end
 end

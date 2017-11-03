@@ -9,15 +9,22 @@ class Game
   end
 
   def play(placement_array)
-    spot_empty?(placement_array)
     place_mark(placement_array)
-    game_over("win") if currect_player_win?
-    game_over if @board.board_full?
-    go_to_next_turn
+    finish_turn
+  end
+
+  def spot_available?(placement_array)
+    (return false) if !spot_in_grid?(placement_array)
+    (return false) if !spot_empty?(placement_array)
+    return true
+  end
+
+  def spot_in_grid?(placement_array)
+    (placement_array[0] < 3) && (placement_array[1] < 3)
   end
 
   def spot_empty?(placement_array)
-    raise "Spot not empty!" unless @board.spot_empty?(placement_array)
+    @board.spot_empty?(placement_array)
   end
 
   def place_mark(placement_array)
@@ -25,16 +32,35 @@ class Game
     @board.play(mark, placement_array)
   end
 
+  def finish_turn
+    if currect_player_win?
+      game_over("win")
+    elsif @board.board_full?
+      game_over
+    else
+      go_to_next_turn
+    end
+  end
+
   def currect_player_win?
     @board.you_win?
   end
 
   def game_over(result="draw")
+    result == "win" ? (return "You win!") : (return "It's a draw!")
     @board = Board.new
-    result == "win" ? (return "You won!") : (return "It's a draw!")
   end
 
   def go_to_next_turn
     @board.next_turn
+    return "Next player's turn"
+  end
+
+  def print_grid
+    p "-------------"
+    @board.grid.each do |row|
+      p "| #{row[0]} | #{row[1]} | #{row[2]} |"
+      p "-------------"
+    end
   end
 end

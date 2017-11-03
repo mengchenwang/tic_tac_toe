@@ -3,9 +3,9 @@ class Board
   attr_reader :grid, :turn, :marks
 
   def initialize
-    @grid = [[8, 8, 8],
-             [8, 8, 8],
-             [8, 8, 8]]
+    @grid = [["-", "-", "-"],
+             ["-", "-", "-"],
+             ["-", "-", "-"]]
     @turn = 0
     @marks = { X: { row:[0, 0, 0], column:[0, 0, 0], diagonal:[0, 0] },
                O: { row:[0, 0, 0], column:[0, 0, 0], diagonal:[0, 0] } }
@@ -29,7 +29,7 @@ class Board
   def spot_empty?(placement_array)
     row = placement_array[0]
     column = placement_array[1]
-    (@grid[row][column] == 8) ? true : false
+    (@grid[row][column] == "-") ? true : false
   end
 
   def next_turn
